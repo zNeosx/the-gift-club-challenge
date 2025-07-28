@@ -1,4 +1,56 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
 :root {
+  --color-primary: #3f5efb;
+  --color-secondary: #fc466b;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.drop-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 350px;
+}
+
+.drop-zone:hover,
+.drop-zone[data-dragging='true'] {
+  /* background-color: lightgray; */
+  background: #f3f3f3;
+}
+
+.drop-zone:has(img) {
+  border: none;
+}
+
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +117,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
