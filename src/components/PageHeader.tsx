@@ -1,8 +1,9 @@
 import { MoreHoriz, QrCode } from '@mui/icons-material';
-import { alpha, Button, Stack, Typography } from '@mui/material';
+import { alpha, Box, Button, Stack, Typography } from '@mui/material';
 import { ModalType, useModalStore } from '../stores/modal.store';
 import MobileMenu from './MobileMenu';
 import PageContainer from './PageContainer';
+import LogoImg from '../assets/logo.png';
 
 type Props = {
   onCampaignSave: () => void;
@@ -24,9 +25,16 @@ const PageHeader = ({ onCampaignSave }: Props) => {
           alignContent={'center'}
           direction={'row'}
         >
-          <Typography variant="h3" component={'h1'}>
-            Ma Campagne
-          </Typography>
+          <Box
+            component="img"
+            src={LogoImg}
+            alt="Ma Campagne"
+            sx={{
+              width: { xs: 200, sm: 300, md: 500 },
+              height: 'auto',
+              flexShrink: 0,
+            }}
+          />
 
           <Stack
             direction={'row'}
