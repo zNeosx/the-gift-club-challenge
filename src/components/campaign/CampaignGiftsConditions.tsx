@@ -1,11 +1,55 @@
 import { Stack, Switch } from '@mui/material';
+import { useCallback } from 'react';
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form';
 import type { CampaignFormData } from '../../lib/validations/campaign.schema';
-import { Controller, useFormContext } from 'react-hook-form';
+import { ModalType, useModalStore } from '../../stores/modal.store';
+import type { Conditions } from '../../types';
 import ToggleOption from '../common/ToggleOption';
 import CampaignGiftsConditionsTable from './CampaignGiftsConditionsTable';
 
 const CampaignGiftsConditions = () => {
+  const { openModal } = useModalStore();
+
   const { control, watch, getValues } = useFormContext<CampaignFormData>();
+
+  const {
+    append: appendCondition,
+    update: updateCondition,
+    remove: removeCondition,
+  } = useFieldArray<CampaignFormData, 'configuration.retrievalConditions'>({
+    control,
+    name: 'configuration.retrievalConditions',
+  });
+
+  const handleAddCondition = useCallback(
+    (giftId: string) => {
+      openModal(ModalType.ADD_EDIT_CONDITION, {
+        action: 'ADD',
+        appendCondition,
+        giftId,
+      });
+    },
+    [openModal, appendCondition]
+  );
+
+  const handleEditCondition = useCallback(
+    (index: number, condition: Conditions) => {
+      openModal(ModalType.ADD_EDIT_CONDITION, {
+        action: 'EDIT',
+        updateCondition,
+        condition,
+        index,
+      });
+    },
+    [openModal, updateCondition]
+  );
+
+  const handleRemoveCondition = useCallback(
+    (index: number) => {
+      removeCondition(index);
+    },
+    [removeCondition]
+  );
 
   const configurationType = watch('configuration.conditionsType');
   return (
@@ -45,6 +89,9 @@ const CampaignGiftsConditions = () => {
       <CampaignGiftsConditionsTable
         gifts={getValues('configuration.gifts')}
         conditions={getValues('configuration.retrievalConditions')}
+        handleEditCondition={handleEditCondition}
+        handleAddCondition={handleAddCondition}
+        handleRemoveCondition={handleRemoveCondition}
       />
     </Stack>
   );

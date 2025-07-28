@@ -39,7 +39,7 @@ const formSchema = giftSchema
     id: true,
   })
   .extend({
-    drawDate: z.string().optional(), // On valide la condition ensuite
+    drawDate: z.string().optional(),
   })
   .superRefine((data, ctx) => {
     if (data.type === 'DRAW' && !data.drawDate) {
@@ -69,7 +69,6 @@ const AddGiftForm = ({ addGift, addCondition }: Props) => {
   const watchType = form.watch('type');
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log('data', data);
     const giftId = nanoid();
     addGift({
       id: giftId,
@@ -87,8 +86,6 @@ const AddGiftForm = ({ addGift, addCondition }: Props) => {
     closeModal();
     return;
   }
-
-  console.log('form', form.formState.errors);
 
   return (
     <FormProvider {...form}>

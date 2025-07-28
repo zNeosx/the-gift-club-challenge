@@ -61,11 +61,7 @@ export default function CampaignActionsTable() {
                       <Typography>{formatActionType(row.action)}</Typography>
                     </Stack>
                   </TableCell>
-                  <Stack
-                    direction={'row'}
-                    alignItems={'center'}
-                    // sx={{ borderBottom: 1, borderColor: 'lightgray' }}
-                  >
+                  <Stack direction={'row'} alignItems={'center'}>
                     <TableCell sx={{ flexGrow: 1 }}>
                       <Stack direction={'row'} alignItems={'center'}>
                         <Typography>{row.target}</Typography>
@@ -94,92 +90,3 @@ export default function CampaignActionsTable() {
     </TableContainer>
   );
 }
-// components/ActionTable.tsx
-// import {
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableContainer,
-//   TableHead,
-//   TableRow,
-//   Paper,
-//   IconButton,
-//   Typography,
-//   Button,
-//   Stack,
-//   Chip,
-// } from '@mui/material';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import AddIcon from '@mui/icons-material/Add';
-// import { useCampaignActionStore } from '../../stores/campaign-actions.store';
-
-// const ActionTable = () => {
-//   const { actions, removeAction } = useCampaignActionStore();
-
-//   return (
-//     <TableContainer component={Paper} sx={{ mt: 3 }}>
-//       <Table>
-//         <TableHead>
-//           <TableRow>
-//             <TableCell>
-//               <b>Ordre des actions</b>
-//             </TableCell>
-//             <TableCell>
-//               <b>Action</b>
-//             </TableCell>
-//             <TableCell>
-//               <b>Cible</b>
-//             </TableCell>
-//             <TableCell align="center">
-//               <b></b>
-//             </TableCell>
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//           {actions.map((action, index) => (
-//             <TableRow key={action.id}>
-//               <TableCell>
-//                 {index === 0
-//                   ? 'Première action'
-//                   : index === actions.length - 1
-//                   ? 'Dernière action'
-//                   : `${index + 1}ème action`}
-//               </TableCell>
-//               <TableCell>
-//                 <Stack direction="row" alignItems="center" spacing={1}>
-//                   {getActionIcon(action.type)}
-//                   <Typography>{formatActionType(action.type)}</Typography>
-//                 </Stack>
-//               </TableCell>
-//               <TableCell>
-//                 <Stack direction="row" spacing={1} alignItems="center">
-//                   <Typography>{action.target}</Typography>
-//                   <Chip label="Intégré" color="success" size="small" />
-//                 </Stack>
-//               </TableCell>
-//               <TableCell align="right">
-//                 <IconButton
-//                   color="error"
-//                   onClick={() => removeAction(action.id)}
-//                 >
-//                   <DeleteIcon />
-//                 </IconButton>
-//               </TableCell>
-//             </TableRow>
-//           ))}
-
-//           {/* Bouton pour ajouter une action */}
-//           <TableRow>
-//             <TableCell colSpan={4}>
-//               <Button startIcon={<AddIcon />} color="primary">
-//                 Ajouter une action
-//               </Button>
-//             </TableCell>
-//           </TableRow>
-//         </TableBody>
-//       </Table>
-//     </TableContainer>
-//   );
-// };
-
-// export default ActionTable;

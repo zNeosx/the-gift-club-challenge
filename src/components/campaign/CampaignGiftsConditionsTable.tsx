@@ -1,4 +1,5 @@
 import { AddCircleOutline, Delete } from '@mui/icons-material';
+import EditIcon from '@mui/icons-material/Edit';
 import { Button, IconButton, Stack, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,12 +8,30 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import type { Conditions, Gift } from '../../types';
+import { useFormContext } from 'react-hook-form';
+import type { CampaignFormData } from '../../lib/validations/campaign.schema';
 
 type Props = {
   gifts: Gift[];
   conditions: Conditions[];
+  handleEditCondition: (index: number, condition: Conditions) => void;
+  handleAddCondition: (giftId: string) => void;
+  handleRemoveCondition: (index: number) => void;
 };
-const CampaignGiftsConditionsTable = ({ gifts, conditions }: Props) => {
+
+const CampaignGiftsConditionsTable = ({
+  gifts,
+  conditions,
+  handleEditCondition,
+  handleAddCondition,
+  handleRemoveCondition,
+}: Props) => {
+  const { watch } = useFormContext<CampaignFormData>();
+
+  const conditionType = watch('configuration.conditionsType');
+
+  const isConditionNone = conditionType === 'NONE';
+
   return (
     <Stack spacing={4}>
       <Stack spacing={1} sx={{ paddingLeft: 4 }}>
@@ -57,7 +76,7 @@ const CampaignGiftsConditionsTable = ({ gifts, conditions }: Props) => {
           <TableBody>
             {gifts
               .filter((gift) => gift.type !== 'LOSS')
-              .map((gift) => {
+              .map((gift, index) => {
                 const [condition] = conditions.filter(
                   (condition) => condition.giftId === gift.id
                 );
@@ -75,21 +94,59 @@ const CampaignGiftsConditionsTable = ({ gifts, conditions }: Props) => {
                     }}
                   >
                     <TableCell>{gift.name}</TableCell>
-                    <TableCell>{condition.name}</TableCell>
                     <TableCell>
-                      {condition.value === 'null' ? null : (
+                      {condition ? (
+                        <Typography>{condition.name}</Typography>
+                      ) : (
+                        <Typography color="gray">Aucune</Typography>
+                      )}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        pointerEvents: isConditionNone ? 'none' : 'initial',
+                        '& > .MuiButton-root': {
+                          color: isConditionNone ? 'lightgray' : 'blue',
+                        },
+                      }}
+                    >
+                      {condition ? (
                         <Button
-                          sx={{ textTransform: 'initial' }}
-                          startIcon={<AddCircleOutline />}
+                          sx={{
+                            textTransform: 'initial',
+                            color: 'primary.main',
+                            minWidth: 0,
+                            padding: 0,
+                          }}
+                          startIcon={<EditIcon fontSize="small" />}
+                          onClick={() => handleEditCondition(index, condition)}
+                        >
+                          Modifier
+                        </Button>
+                      ) : (
+                        <Button
+                          sx={{
+                            textTransform: 'initial',
+                            color: 'primary.main',
+                            minWidth: 0,
+                            padding: 0,
+                          }}
+                          startIcon={<AddCircleOutline fontSize="small" />}
+                          onClick={() => handleAddCondition(gift.id)}
                         >
                           Ajouter une condition
                         </Button>
                       )}
                     </TableCell>
                     <TableCell align="right">
-                      <IconButton size="small" sx={{ color: '#757575' }}>
-                        <Delete fontSize="small" />
-                      </IconButton>
+                      {condition && (
+                        <IconButton
+                          size="small"
+                          sx={{ color: '#757575' }}
+                          onClick={() => handleRemoveCondition(index)}
+                        >
+                          <Delete fontSize="small" />
+                        </IconButton>
+                      )}
                     </TableCell>
                   </TableRow>
                 );

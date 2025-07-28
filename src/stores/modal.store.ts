@@ -8,6 +8,7 @@ export const ModalType = {
   CONFIGURE_PIN_CODE: 'CONFIGURE_PIN_CODE',
   ADD_GIFT: 'ADD_GIFT',
   EDIT_GIFT: 'EDIT_GIFT',
+  ADD_EDIT_CONDITION: 'ADD_EDIT_CONDITION',
 } as const;
 
 export type ModalType = (typeof ModalType)[keyof typeof ModalType];

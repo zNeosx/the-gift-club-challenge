@@ -14,6 +14,7 @@ const CampaignGains = () => {
   const { openModal } = useModalStore();
   const { control, setError, formState, clearErrors } =
     useFormContext<CampaignFormData>();
+
   const {
     fields,
     append: appendGain,
@@ -23,6 +24,7 @@ const CampaignGains = () => {
     control,
     name: 'configuration.gifts',
   });
+
   const { append: appendCondition, remove: removeCondition } = useFieldArray<
     CampaignFormData,
     'configuration.retrievalConditions'

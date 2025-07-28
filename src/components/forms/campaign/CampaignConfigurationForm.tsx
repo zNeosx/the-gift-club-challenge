@@ -30,9 +30,9 @@ const CampaignConfigurationForm = () => {
         disabled: campaign.configuration.disabled ?? true,
         game_type: campaign.configuration.game_type ?? 'WHEEL',
         gifts: campaign.configuration.gifts ?? [],
-        retrievalConditions: [],
+        retrievalConditions: campaign.configuration.retrievalConditions ?? [],
         logo_uri: campaign.configuration.logo_uri ?? '',
-        conditionsType: 'NONE',
+        conditionsType: campaign.configuration.conditionsType ?? 'NONE',
       },
       enabled: true,
       label: 'New Campaign',
@@ -40,10 +40,16 @@ const CampaignConfigurationForm = () => {
     },
   });
 
-  const { handleSubmit, getValues, setError, clearErrors } = methods;
+  const {
+    handleSubmit,
+    getValues,
+    setError,
+
+    formState,
+    clearErrors,
+  } = methods;
 
   const onSubmit = (data: CampaignFormData) => {
-    console.log('Campaign Data:', data);
     const gifts = getValues('configuration.gifts');
     const isWinningGame = getValues('configuration.disabled');
 
@@ -68,10 +74,12 @@ const CampaignConfigurationForm = () => {
     }
 
     clearErrors('configuration.gifts');
+
     mergeCampaign(data);
     alert('Votre campagne a bien été sauvegardée.');
   };
 
+  console.log('debug errors :', formState.errors);
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>

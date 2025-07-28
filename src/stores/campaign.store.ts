@@ -1,4 +1,3 @@
-// stores/campaign.store.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { Campaign, Action, Colors, GameType, Profile } from '../types';
@@ -19,6 +18,7 @@ const createDefaultCampaign = (): Campaign => ({
     gifts: [],
     retrievalConditions: [],
     logo_uri: '',
+    conditionsType: 'NONE',
   },
   created_at: new Date().toISOString(),
   created_by: 'system',

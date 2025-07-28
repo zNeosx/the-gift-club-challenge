@@ -75,6 +75,6 @@ export function getFrenchOrdinal(n: number): string {
     case 10:
       return 'dixième';
     default:
-      return `${n}ème`; // Pour les nombres plus grands
+      return `${n}ème`;
   }
 }

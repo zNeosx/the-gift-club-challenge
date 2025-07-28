@@ -4,14 +4,14 @@ import { styled, type SxProps, type Theme } from '@mui/material/styles';
 
 const StyledInput = styled(InputBase)(({ theme }) => ({
   display: 'flex',
-  height: '44px', // h-11
+  height: '44px',
   width: '100%',
   minWidth: 0,
   borderRadius: '8px',
   border: `1px solid ${theme.palette.divider}`,
   backgroundColor: 'transparent',
   padding: '0 12px',
-  fontSize: '1rem', // text-base
+  fontSize: '1rem',
   transition: 'color 0.2s, box-shadow 0.2s, border-color 0.2s',
   outline: 'none',
   '&::placeholder': {

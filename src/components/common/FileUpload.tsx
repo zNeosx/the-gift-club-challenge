@@ -77,7 +77,6 @@ const FileUpload = ({ name, accept = 'image/*' }: Props) => {
           onDrop={handleDrop}
           onClick={() => {
             if (inputFileRef.current) {
-              console.log('click');
               inputFileRef.current.click();
             }
           }}
@@ -87,12 +86,10 @@ const FileUpload = ({ name, accept = 'image/*' }: Props) => {
             type="file"
             accept={accept}
             className="sr-only"
-            // hidden
             aria-label="Upload file"
             ref={inputFileRef}
             onChange={(e) => {
               if (e.target.files && e.target.files[0]) {
-                console.log('e.target.files', e.target.files);
                 handleFile(e.target.files[0]);
               }
             }}

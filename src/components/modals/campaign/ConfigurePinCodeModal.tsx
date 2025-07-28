@@ -36,7 +36,6 @@ const ConfigurePinCodeModal = () => {
           CODE PIN MODAL
         </Typography>
 
-        {/* <OTPInput /> */}
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type="tel"

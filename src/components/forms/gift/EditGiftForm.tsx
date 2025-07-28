@@ -50,7 +50,6 @@ const EditGiftForm = ({ editGift, gift, index }: Props) => {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log('data', data);
     editGift(index, {
       id: gift.id,
       ...data,

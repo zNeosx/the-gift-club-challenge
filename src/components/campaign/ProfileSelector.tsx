@@ -5,18 +5,6 @@ import { Stack, Typography } from '@mui/material';
 export function ProfileSelector() {
   const { register } = useFormContext<CampaignFormData>();
 
-  // return (
-  //   <div>
-  //     <label>
-  //       <input type="radio" value="BASIC" {...register('profile')} />
-  //       <Typography>Basic</Typography>
-  //     </label>
-  //     <label>
-  //       <input type="radio" value="PREMIUM" {...register('profile')} />
-  //       <Typography>Premium</Typography>
-  //     </label>
-  //   </div>
-  // );
   return (
     <Stack
       direction="row"
