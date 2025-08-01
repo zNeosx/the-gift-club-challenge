@@ -53,8 +53,8 @@ const CampaignGiftsConditions = () => {
 
   const configurationType = watch('configuration.conditionsType');
   return (
-    <Stack spacing={2}>
-      <Stack sx={{ flexDirection: 'row', alignItems: 'start', gap: 6 }}>
+    <Stack spacing={{ xs: 6, md: 2 }}>
+      <Stack sx={{ flexDirection: { md: 'row' }, alignItems: 'start', gap: 6 }}>
         <ToggleOption
           label="Pas de condition"
           description="Les clients peuvent récupérer leur gain sans aucun achat."

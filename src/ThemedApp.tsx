@@ -12,6 +12,16 @@ export default function ThemedApp() {
       primary: {
         main: campaign?.configuration.colors.primary,
       },
+      error: {
+        main: '#f44336',
+        light: '#f5c2c7',
+      },
+      warning: {
+        dark: '#F6970F',
+        contrastText: '#F6970F',
+        main: '#FFCC00',
+        light: '#FFF2BF',
+      },
       secondary: { main: campaign?.configuration.colors.secondary },
     },
     spacing: 8,

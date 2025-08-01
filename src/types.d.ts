@@ -1,4 +1,7 @@
-export type ActionType = 'INSTAGRAM' | 'GOOGLE_REVIEW' | 'TIKTOK' | 'FACEBOOK';
+import type z from 'zod';
+import type { actionTypeSchema } from './lib/validations/campaign.schema';
+
+export type ActionType = z.infer<typeof actionTypeSchema>;
 export type GiftType = 'EAT' | 'DRINK' | 'DISCOUNT' | 'LOSS' | 'DRAW';
 export type GameType = 'WHEEL' | 'SLOT_MACHINE' | 'MYSTERY' | 'CARD';
 export type Profile = 'PREMIUM' | 'BASIC';

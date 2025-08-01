@@ -1,4 +1,5 @@
 import { useModalStore } from '../../stores/modal.store';
+import CampaignAdActionModal from './campaign/CampaignAddActionModal';
 import ConditionModal from './campaign/ConditionsModal';
 import ConfigurePinCodeModal from './campaign/ConfigurePinCodeModal';
 import PinCodeModal from './campaign/PinCodeModal';
@@ -18,6 +19,7 @@ export default function ModalRoot() {
       <QrCodeModal />
       <SaveCampaignModal />
       <ConfigurePinCodeModal />
+      <CampaignAdActionModal />
       <AddGiftModal />
       <EditGiftModal />
       <ConditionModal />

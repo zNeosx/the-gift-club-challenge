@@ -8,11 +8,19 @@ export const giftTypeSchema = z.enum([
   'DRAW',
 ]);
 
+export const actionTypeSchema = z.enum([
+  'INSTAGRAM',
+  'GOOGLE_REVIEW',
+  'TIKTOK',
+  'FACEBOOK',
+  'SPONSORSHIP',
+]);
+
 export const actionSchema = z.object({
-  id: z.string().uuid(),
-  priority: z.number().min(1),
-  target: z.string().url({ message: 'Cible invalide' }),
-  type: z.enum(['INSTAGRAM', 'GOOGLE_REVIEW', 'TIKTOK', 'FACEBOOK']),
+  id: z.string(),
+  priority: z.number().min(0),
+  target: z.string().optional(),
+  type: actionTypeSchema,
 });
 
 export const colorsSchema = z.object({
@@ -60,7 +68,16 @@ export const conditionsSchema = z.object({
 
 export const configurationSchema = z
   .object({
-    actions: z.array(actionSchema),
+    actions: z.array(actionSchema).refine(
+      (actions) => {
+        const types = actions.map((a) => a.type);
+        return new Set(types).size === types.length;
+      },
+      {
+        message: 'Les actions doivent être uniques',
+        path: ['actions'], // ça mettra l'erreur sur configuration.actions
+      }
+    ),
     colors: colorsSchema,
     disabled: z.boolean(),
     game_type: z.enum(['WHEEL', 'SLOT_MACHINE', 'MYSTERY', 'CARD']),

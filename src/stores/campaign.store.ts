@@ -1,13 +1,14 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Campaign, Action, Colors, GameType, Profile } from '../types';
+import type { CampaignFormData } from '../lib/validations/campaign.schema';
+import type { Action, Colors, GameType, Profile } from '../types';
 
 const DEFAULT_COLORS: Colors = {
   primary: '#3f5efb',
   secondary: '#F59000',
 };
 
-const createDefaultCampaign = (): Campaign => ({
+const createDefaultCampaign = (): CampaignFormData => ({
   id: crypto.randomUUID(),
   profile: 'BASIC' as Profile,
   configuration: {
@@ -30,9 +31,9 @@ const createDefaultCampaign = (): Campaign => ({
 });
 
 interface CampaignState {
-  campaign: Campaign;
-  setCampaign: (campaign: Campaign) => void;
-  mergeCampaign: (partial: Partial<Campaign>) => void;
+  campaign: CampaignFormData;
+  setCampaign: (campaign: CampaignFormData) => void;
+  mergeCampaign: (partial: Partial<CampaignFormData>) => void;
   updateProfile: (profile: Profile) => void;
   updateColors: (colors: Colors) => void;
   updateLogo: (logoUri: string) => void;

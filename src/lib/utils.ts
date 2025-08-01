@@ -1,5 +1,18 @@
-import { Facebook, Google, Instagram } from '@mui/icons-material';
+import { Facebook, Google, Group, Instagram } from '@mui/icons-material';
 import type { ActionType, GiftType } from '../types';
+
+export function formatActionPriority(priority: number | undefined) {
+  switch (priority) {
+    case 0:
+      return 'Première action';
+    case 1:
+      return 'Deuxième action';
+    case 2:
+      return 'Troisème action';
+    default:
+      return '';
+  }
+}
 
 export function formatActionType(type: ActionType | undefined) {
   switch (type) {
@@ -11,6 +24,8 @@ export function formatActionType(type: ActionType | undefined) {
       return 'TikTok';
     case 'FACEBOOK':
       return 'Facebook';
+    case 'SPONSORSHIP':
+      return 'Parrainage';
     default:
       return type;
   }
@@ -26,6 +41,8 @@ export function getActionIcon(type: ActionType | undefined) {
       return null;
     case 'FACEBOOK':
       return Facebook;
+    case 'SPONSORSHIP':
+      return Group;
     default:
       return null;
   }

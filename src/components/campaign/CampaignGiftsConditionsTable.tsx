@@ -34,7 +34,7 @@ const CampaignGiftsConditionsTable = ({
 
   return (
     <Stack spacing={4}>
-      <Stack spacing={1} sx={{ paddingLeft: 4 }}>
+      <Stack spacing={1} sx={{ paddingLeft: { xs: 2, md: 4 } }}>
         <Typography
           component={'p'}
           sx={{ fontSize: '14px', fontWeight: 'bold' }}
