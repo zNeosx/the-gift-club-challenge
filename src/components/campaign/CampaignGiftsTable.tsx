@@ -17,7 +17,7 @@ type Props = {
   handleRemoveGift: (index: number) => void;
   fields: CampaignFormData['configuration']['gifts'][number][];
 };
-const CampaignGainsTable = ({
+const CampaignGiftsTable = ({
   handleAddGift,
   handleEditGift,
   handleRemoveGift,
@@ -184,4 +184,4 @@ const CampaignGainsTable = ({
   );
 };
 
-export default React.memo(CampaignGainsTable);
+export default React.memo(CampaignGiftsTable);

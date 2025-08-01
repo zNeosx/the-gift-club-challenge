@@ -8,18 +8,18 @@ import { ModalType, useModalStore } from '../../stores/modal.store';
 import type { Gift } from '../../types';
 import ToggleOptionControlled from '../common/ToggleOptionControlled';
 import { FormMessage } from '../ui/FormMessage';
-import CampaignGainsTable from './CampaignGainsTable';
+import CampaignGiftsTable from './CampaignGiftsTable';
 
-const CampaignGains = () => {
+const CampaignGifts = () => {
   const { openModal } = useModalStore();
   const { control, setError, formState, clearErrors } =
     useFormContext<CampaignFormData>();
 
   const {
     fields,
-    append: appendGain,
-    remove: removeGain,
-    update: updateGain,
+    append: appendGift,
+    remove: removeGift,
+    update: updateGift,
   } = useFieldArray<CampaignFormData, 'configuration.gifts'>({
     control,
     name: 'configuration.gifts',
@@ -60,7 +60,7 @@ const CampaignGains = () => {
       const hasLoss = gifts.some((g) => g.type === 'LOSS');
 
       if (!hasLoss && !lossAddedRef.current) {
-        appendGain({
+        appendGift({
           id: nanoid(),
           icon: '',
           name: 'Perte',
@@ -93,26 +93,26 @@ const CampaignGains = () => {
   }, [gifts]);
 
   const handleAddGift = useCallback(() => {
-    openModal(ModalType.ADD_GIFT, { append: appendGain, appendCondition });
-  }, [openModal, appendGain, appendCondition]);
+    openModal(ModalType.ADD_GIFT, { append: appendGift, appendCondition });
+  }, [openModal, appendGift, appendCondition]);
 
   const handleEditGift = useCallback(
     (field: Gift, index: number) => {
       openModal(ModalType.EDIT_GIFT, {
-        update: updateGain,
+        update: updateGift,
         gift: field,
         index,
       });
     },
-    [openModal, updateGain]
+    [openModal, updateGift]
   );
 
   const handleRemoveGift = useCallback(
     (index: number) => {
-      removeGain(index);
+      removeGift(index);
       removeCondition(index);
     },
-    [removeGain, removeCondition]
+    [removeGift, removeCondition]
   );
 
   return (
@@ -160,7 +160,7 @@ const CampaignGains = () => {
       ) : null}
 
       {/* GIFTS TABLE */}
-      <CampaignGainsTable
+      <CampaignGiftsTable
         fields={fields}
         handleAddGift={handleAddGift}
         handleEditGift={handleEditGift}
@@ -170,4 +170,4 @@ const CampaignGains = () => {
   );
 };
 
-export default React.memo(CampaignGains);
+export default React.memo(CampaignGifts);

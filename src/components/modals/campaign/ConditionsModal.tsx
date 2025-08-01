@@ -81,6 +81,7 @@ const ConditionModal = () => {
     }
 
     closeModal();
+    form.reset();
     return;
   }
   return (
@@ -122,7 +123,7 @@ const ConditionModal = () => {
                   sx={{ textTransform: 'initial' }}
                   component={'span'}
                 >
-                  Modifier
+                  {action === 'ADD' ? 'Ajouter' : ' Modifier'}
                 </Typography>
               </Button>
             </Stack>

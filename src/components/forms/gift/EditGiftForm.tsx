@@ -56,6 +56,7 @@ const EditGiftForm = ({ editGift, gift, index }: Props) => {
     });
 
     closeModal();
+    form.reset();
     return;
   }
 

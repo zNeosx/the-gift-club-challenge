@@ -84,6 +84,7 @@ const AddGiftForm = ({ addGift, addCondition }: Props) => {
       });
     }
     closeModal();
+    form.reset();
     return;
   }
 

@@ -9,7 +9,7 @@ import { useCampaignStore } from '../../../stores/campaign.store';
 import { usePinCodeStore } from '../../../stores/pin_code.store';
 import PinCodeAlert from '../../alerts/PinCodeAlert';
 import CampaignActions from '../../campaign/CampaignActions';
-import CampaignGains from '../../campaign/CampaignGains';
+import CampaignGifts from '../../campaign/CampaignGifts';
 import CampaignGameCustomization from '../../campaign/CampaignGameCustomization';
 import CampaignGames from '../../campaign/CampaignGames';
 import CampaignGiftsConditions from '../../campaign/CampaignGiftsConditions';
@@ -172,7 +172,7 @@ const CampaignConfigurationForm = () => {
               title="Ajoutez et configurez vos gains"
               subtitle={`Indiquez les récompenses que vos clients pourront gagner. Offrez des cadeaux attractifs pour augmenter leur engagement et leur fidélité.`}
             />
-            <CampaignGains />
+            <CampaignGifts />
           </section>
           <Divider component="li" sx={{ marginY: 6 }} />
           <section>
