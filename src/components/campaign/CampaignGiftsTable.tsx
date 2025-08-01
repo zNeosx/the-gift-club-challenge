@@ -23,6 +23,20 @@ const CampaignGiftsTable = ({
   handleRemoveGift,
   fields,
 }: Props) => {
+  const formatStock = (limit: number) => ({
+    isUnlimited: limit === -1,
+    displayValue: limit === -1 ? 'Illimité' : limit.toString(),
+  });
+
+  const formatDrawDate = (drawDate?: string) => {
+    if (!drawDate) return null;
+
+    return new Date(drawDate).toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+  };
   return (
     <TableContainer
       sx={{
@@ -52,12 +66,13 @@ const CampaignGiftsTable = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {fields.map((field, index) => {
-            const stockValue = field.limit;
-            const isUnlimitedStock = stockValue > 0 ? false : true;
+          {fields.map((gift, index) => {
+            const { isUnlimited, displayValue } = formatStock(gift.limit);
+            const drawDateFormatted = formatDrawDate(gift.drawDate);
+
             return (
               <TableRow
-                key={field.id}
+                key={gift.id}
                 sx={{
                   cursor: 'pointer',
                   '&:last-child td, &:last-child th': { border: 0 },
@@ -67,9 +82,9 @@ const CampaignGiftsTable = ({
                     fontSize: '0.9rem',
                   },
                 }}
-                onDoubleClick={() => handleEditGift(field, index)}
+                onDoubleClick={() => handleEditGift(gift, index)}
               >
-                <TableCell>{field.name}</TableCell>
+                <TableCell>{gift.name}</TableCell>
                 <TableCell>
                   <Stack
                     sx={{
@@ -79,9 +94,9 @@ const CampaignGiftsTable = ({
                     }}
                   >
                     <Typography component={'p'}>
-                      {translateGiftType(field.type)}
+                      {translateGiftType(gift.type)}
                     </Typography>
-                    {field.type === 'DRAW' && field.drawDate ? (
+                    {gift.type === 'DRAW' && gift.drawDate ? (
                       <Stack
                         sx={{
                           flexDirection: 'row',
@@ -94,13 +109,7 @@ const CampaignGiftsTable = ({
                           component={'p'}
                           sx={{ color: 'lightgray', fontSize: '14px' }}
                         >
-                          {`Jusqu'au ${new Date(
-                            field.drawDate
-                          ).toLocaleDateString('fr-FR', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric',
-                          })}`}
+                          {`Jusqu'au ${drawDateFormatted}`}
                         </Typography>
                       </Stack>
                     ) : null}
@@ -117,10 +126,10 @@ const CampaignGiftsTable = ({
                     <Typography
                       component={'p'}
                       sx={{
-                        color: isUnlimitedStock ? 'lightgray' : 'black',
+                        color: isUnlimited ? 'lightgray' : 'black',
                       }}
                     >
-                      {isUnlimitedStock ? 'Illimité' : stockValue}
+                      {displayValue}
                     </Typography>
                     <Stack
                       sx={{
@@ -132,14 +141,14 @@ const CampaignGiftsTable = ({
                       <Typography
                         component={'p'}
                         sx={{
-                          color: !isUnlimitedStock ? 'lightgray' : 'black',
+                          color: !isUnlimited ? 'lightgray' : 'black',
                         }}
                       >
                         Illimité
                       </Typography>
                       <Switch
-                        disabled={!isUnlimitedStock}
-                        checked={isUnlimitedStock}
+                        disabled={!isUnlimited}
+                        checked={isUnlimited}
                         onChange={(event) => {
                           const value = event.target.valueAsNumber;
 

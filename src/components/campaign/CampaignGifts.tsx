@@ -2,7 +2,9 @@ import { Add, LocalActivity } from '@mui/icons-material';
 import { Button, Stack, Typography } from '@mui/material';
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useRef } from 'react';
-import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
+import useCampaignConditions from '../../lib/hooks/useCampaignConditions';
+import useCampaignGifts from '../../lib/hooks/useCampaignGifts';
 import type { CampaignFormData } from '../../lib/validations/campaign.schema';
 import { ModalType, useModalStore } from '../../stores/modal.store';
 import type { Gift } from '../../types';
@@ -15,23 +17,10 @@ const CampaignGifts = () => {
   const { control, setError, formState, clearErrors } =
     useFormContext<CampaignFormData>();
 
-  const {
-    fields,
-    append: appendGift,
-    remove: removeGift,
-    update: updateGift,
-  } = useFieldArray<CampaignFormData, 'configuration.gifts'>({
-    control,
-    name: 'configuration.gifts',
-  });
+  const { fields, removeGiftWithCondition, appendGift, updateGift } =
+    useCampaignGifts();
 
-  const { append: appendCondition, remove: removeCondition } = useFieldArray<
-    CampaignFormData,
-    'configuration.retrievalConditions'
-  >({
-    control,
-    name: 'configuration.retrievalConditions',
-  });
+  const { appendCondition } = useCampaignConditions();
 
   const gifts = useWatch({
     control,
@@ -107,14 +96,6 @@ const CampaignGifts = () => {
     [openModal, updateGift]
   );
 
-  const handleRemoveGift = useCallback(
-    (index: number) => {
-      removeGift(index);
-      removeCondition(index);
-    },
-    [removeGift, removeCondition]
-  );
-
   return (
     <Stack spacing={2}>
       <ToggleOptionControlled
@@ -164,7 +145,7 @@ const CampaignGifts = () => {
         fields={fields}
         handleAddGift={handleAddGift}
         handleEditGift={handleEditGift}
-        handleRemoveGift={handleRemoveGift}
+        handleRemoveGift={removeGiftWithCondition}
       />
     </Stack>
   );

@@ -61,7 +61,6 @@ const CampaignConfigurationForm = () => {
   } = methods;
 
   const onSubmit = (data: CampaignFormData) => {
-    console.log('data', data);
     const actions = data.configuration.actions;
 
     const types = actions.map((a) => a.type);

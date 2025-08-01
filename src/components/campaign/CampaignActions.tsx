@@ -27,7 +27,6 @@ const CampaignActions = () => {
     [openModal, insertAction]
   );
 
-  console.log('fields', fields);
   return (
     <Stack>
       <CampaignActionsTable
@@ -66,11 +65,12 @@ const CampaignActions = () => {
           >
             <Warning sx={{ width: '20px', height: '20px' }} />
             <Typography component={'span'} sx={{ fontSize: '14px' }}>
-              Vous avez deux actions en doublons.
+              Attention
             </Typography>
           </AlertTitle>
           <AlertDescription sx={{ fontSize: '14px' }}>
-            Veuillez en garder qu'un seul.
+            Vous avez des actions en double dans votre tableau. Veuillez en
+            supprimer ou modifier un.
           </AlertDescription>
         </Alert>
       )}

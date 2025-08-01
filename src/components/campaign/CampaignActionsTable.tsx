@@ -156,8 +156,6 @@ export default function CampaignActionsTable({
                       size="small"
                       sx={{ color: '#757575' }}
                       onClick={() => {
-                        console.log('actions', fields);
-                        console.log('index', index);
                         handleRemoveAction(index);
                       }}
                     >
